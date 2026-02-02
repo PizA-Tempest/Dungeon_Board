@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dungeon-dark text-white font-sans;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-dungeon-accent hover:bg-red-600 text-white font-bold py-2 px-4 rounded
+           transition-all duration-200 transform hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-dungeon-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+           transition-all duration-200 transform hover:scale-105 active:scale-95;
+  }
+
+  .card {
+    @apply bg-dungeon-purple rounded-lg shadow-lg p-6 border border-dungeon-blue;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 rounded bg-dungeon-dark border border-dungeon-blue
+           text-white placeholder-gray-400 focus:outline-none focus:border-dungeon-accent;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e94560;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c73e54;
+}
