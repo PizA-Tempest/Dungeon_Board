@@ -6,10 +6,10 @@ import com.dungeonboard.model.GameState;
 import com.dungeonboard.model.Player;
 import com.dungeonboard.model.board.Tile;
 import com.dungeonboard.model.board.TileType;
-import com.dungeonboard.service.RoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -24,6 +24,7 @@ public class BotAIService {
     @Autowired
     private RoomService roomService;
 
+    @Lazy
     @Autowired
     private GameService gameService;
 
