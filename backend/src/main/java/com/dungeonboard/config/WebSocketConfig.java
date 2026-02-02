@@ -1,6 +1,7 @@
 package com.dungeonboard.config;
 
 import com.dungeonboard.handler.GameWebSocketHandler;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
@@ -10,15 +11,14 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
-    private final GameWebSocketHandler gameWebSocketHandler;
-
-    public WebSocketConfig(GameWebSocketHandler gameWebSocketHandler) {
-        this.gameWebSocketHandler = gameWebSocketHandler;
+    @Bean
+    public GameWebSocketHandler gameWebSocketHandler() {
+        return new GameWebSocketHandler();
     }
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(gameWebSocketHandler, "/ws/game")
-                .setAllowedOrigins("http://localhost:5173", "http://localhost:5174");
+        registry.addHandler(gameWebSocketHandler(), "/ws/game")
+                .setAllowedOrigins("*");
     }
 }
