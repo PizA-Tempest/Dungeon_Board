@@ -4,8 +4,6 @@ import com.dungeonboard.dto.CreateRoomRequest;
 import com.dungeonboard.model.GameState;
 import com.dungeonboard.model.Player;
 import com.dungeonboard.model.Room;
-import com.dungeonboard.repository.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -16,11 +14,8 @@ public class RoomService {
 
     private final Map<String, Room> rooms = new ConcurrentHashMap<>();
     private final Map<String, GameState> gameStates = new ConcurrentHashMap<>();
-    private final RoomRepository roomRepository;
 
-    @Autowired
-    public RoomService(RoomRepository roomRepository) {
-        this.roomRepository = roomRepository;
+    public RoomService() {
     }
 
     public Room createRoom(CreateRoomRequest request, String hostId, String hostUsername) {
