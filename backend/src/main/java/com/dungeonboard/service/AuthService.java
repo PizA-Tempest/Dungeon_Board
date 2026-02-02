@@ -41,7 +41,6 @@ public class AuthService {
         User user = userRepository.findByUsername(loginRequest.getUsername()).orElse(null);
         if (user != null) {
             user.setLastLogin(LocalDateTime.now());
-            user.setOnline(true);
             userRepository.save(user);
         }
 
@@ -56,8 +55,6 @@ public class AuthService {
         User user = new User();
         user.setUsername(signUpRequest.getUsername());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
-        user.setOnline(true);
-        user.setCreatedAt(LocalDateTime.now());
 
         return userRepository.save(user);
     }
@@ -75,11 +72,6 @@ public class AuthService {
     }
 
     public void logoutUser() {
-        User user = getCurrentUser();
-        if (user != null) {
-            user.setOnline(false);
-            userRepository.save(user);
-        }
         SecurityContextHolder.clearContext();
     }
 }

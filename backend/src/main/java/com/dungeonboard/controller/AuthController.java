@@ -23,7 +23,7 @@ public class AuthController {
             User user = authService.authenticateUser(loginRequest);
             String jwt = authService.generateToken(user.getUsername());
 
-            return ResponseEntity.ok(new JwtResponse(jwt, user.getId(), user.getUsername()));
+            return ResponseEntity.ok(new JwtResponse(jwt, "Bearer", user.getId(), user.getUsername()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new MessageResponse("Error: Invalid username or password"));
@@ -36,7 +36,7 @@ public class AuthController {
             User user = authService.registerUser(signUpRequest);
             String jwt = authService.generateToken(user.getUsername());
 
-            return ResponseEntity.ok(new JwtResponse(jwt, user.getId(), user.getUsername()));
+            return ResponseEntity.ok(new JwtResponse(jwt, "Bearer", user.getId(), user.getUsername()));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
         }

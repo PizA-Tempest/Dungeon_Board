@@ -175,7 +175,8 @@ public class GameService {
 
     private GameEvent handleMonsterTile(String roomId, GameState gameState, Player player, Tile tile) {
         int monsterLevel = tile.getMonsterLevel();
-        boolean victory = combatService.resolveCombat(player, monsterLevel);
+        var result = combatService.resolveCombat(player, monsterLevel);
+        boolean victory = result.victory();
 
         if (victory) {
             player.incrementMonstersDefeated();
@@ -208,7 +209,7 @@ public class GameService {
     private GameEvent handleTrapTile(GameState gameState, Player player, Tile tile) {
         // Check for Goblin trap immunity
         if (player.getCharacter() != null &&
-            player.getCharacter().getRace().getRace() == com.dungeonboard.model.character.Race.GOBLIN &&
+            player.getCharacter().getRace() == com.dungeonboard.model.character.Race.GOBLIN &&
             player.getCharacter().getRace().isTrapImmune()) {
             gameState.addLog(player.getUsername() + " (Goblin) is immune to traps!");
             return GameEvent.eventCard("Trap immunity activated!");
