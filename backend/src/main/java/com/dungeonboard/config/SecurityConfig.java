@@ -19,9 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.core.Ordered;
-import com.dungeonboard.filter.CorsFilter;
 
 import java.util.Arrays;
 
@@ -75,7 +72,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors(cors -> cors.disable())
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(new AuthEntryPointJwt()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -96,14 +93,5 @@ public class SecurityConfig {
         http.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
 
         return http.build();
-    }
-
-    @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilterRegistration() {
-        FilterRegistrationBean<CorsFilter> registration = new FilterRegistrationBean<>();
-        registration.setFilter(new CorsFilter());
-        registration.addUrlPatterns("/*");
-        registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return registration;
     }
 }
