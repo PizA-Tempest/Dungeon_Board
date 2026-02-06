@@ -18,7 +18,6 @@ public class DataInitializer {
                 User testUser = new User();
                 testUser.setUsername("testuser");
                 testUser.setPassword(passwordEncoder.encode("password123"));
-                testUser.setRole("USER");
                 userRepository.save(testUser);
                 System.out.println("✓ Test user created: testuser / password123");
             } else {
