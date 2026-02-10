@@ -16,9 +16,10 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // Allow specific origins from environment variable or defaults
-        config.setAllowedOrigins(Arrays.asList(
+        config.setAllowedOriginPatterns(Arrays.asList(
             "https://dungeon-board-game.vercel.app",
             "https://dungeon-board-beta-ten.vercel.app",
+            "https://*.vercel.app",
             "http://localhost:5173",
             "http://localhost:5174"
         ));
